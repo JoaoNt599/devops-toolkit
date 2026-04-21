@@ -1,0 +1,139 @@
+name: Deploy ENV - ECS
+
+on:
+  push:
+    branches:
+      - branch-name
+
+env:
+  AWS_REGION: region-name
+  ECR_REPOSITORY: ecr-repository-name
+  ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}
+  ECS_SERVICE: ${{ secrets.ECS_SERVICE }}
+  APP_URL: ${{ secrets.APP_URL }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Configurar credenciais AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Login no ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: true
+
+      # Definir tag da imagem (imutável com prefixo qa-)
+      - name: Set image tag
+        run: echo "IMAGE_TAG=qa-${{ github.sha }}" >> $GITHUB_ENV
+
+      # Capturar task definition atual (IMPORTANTE PRO ROLLBACK)
+      - name: Get current task definition
+        run: |
+          CURRENT_TASK_DEF=$(aws ecs describe-services \
+            --cluster $ECS_CLUSTER \
+            --services $ECS_SERVICE \
+            --query "services[0].taskDefinition" \
+            --output text)
+
+          echo "CURRENT_TASK_DEF=$CURRENT_TASK_DEF" >> $GITHUB_ENV
+
+      # Build da imagem
+      - name: Build Docker image
+        run: |
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+
+      # Tag para o ECR
+      - name: Tag image
+        run: |
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # Push da imagem
+      - name: Push to ECR
+        run: |
+          docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # Criar nova task definition com nova imagem
+      - name: Register new task definition
+        id: task-def
+        run: |
+          TASK_DEF=$(aws ecs describe-task-definition \
+            --task-definition $CURRENT_TASK_DEF \
+            --query "taskDefinition")
+
+          NEW_TASK_DEF=$(echo $TASK_DEF | jq \
+            --arg IMAGE "${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG" \
+            '.containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)')
+
+          echo $NEW_TASK_DEF > new-task-def.json
+
+          NEW_TASK_DEF_ARN=$(aws ecs register-task-definition \
+            --cli-input-json file://new-task-def.json \
+            --query "taskDefinition.taskDefinitionArn" \
+            --output text)
+
+          echo "NEW_TASK_DEF_ARN=$NEW_TASK_DEF_ARN" >> $GITHUB_ENV
+
+      # Deploy no ECS
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --task-definition $NEW_TASK_DEF_ARN \
+            --force-new-deployment
+
+      # Esperar estabilizar
+      - name: Wait for service stability
+        run: |
+          aws ecs wait services-stable \
+            --cluster $ECS_CLUSTER \
+            --services $ECS_SERVICE
+
+      # Health check real
+      - name: Health check
+        id: healthcheck
+        run: |
+          echo "Realizando health check..."
+
+          for i in {1..5}; do
+            STATUS=$(curl -k -L -s -o /dev/null -w "%{http_code}" $APP_URL || echo "000")
+            echo "Tentativa $i - Status: $STATUS"
+
+            if [ "$STATUS" == "200" ]; then
+              echo "Aplicação saudável"
+              exit 0
+            fi
+
+            sleep 5
+          done
+
+          echo "Health check falhou"
+          exit 1
+
+      # ROLLBACK AUTOMÁTICO
+      - name: Rollback if failed
+        if: failure()
+        run: |
+          echo "Iniciando rollback..."
+
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --task-definition $CURRENT_TASK_DEF \
+            --force-new-deployment
+
+          echo "Rollback executado com sucesso"
