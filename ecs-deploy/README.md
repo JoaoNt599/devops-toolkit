@@ -34,12 +34,12 @@ Antes de executar o script, certifique-se de que o seu ambiente atende aos segui
 
 Antes do primeiro uso, edite o arquivo `deploy.sh` e valide/configure as variáveis globais de ambiente de acordo com a sua infraestrutura:
 
-```bash
-REGION="us-east-1"
-REPO="seu-repositorio/nome-da-imagem"
-CLUSTER_NAME="seu-cluster"
-SERVICE_NAME="seu-servico"
-ECS_TARGET_TAG="latest"
+
+    REGION="us-east-1"
+    REPO="seu-repositorio/nome-da-imagem"
+    CLUSTER_NAME="seu-cluster"
+    SERVICE_NAME="seu-servico"
+    ECS_TARGET_TAG="latest"
 
 (Nota: O ACCOUNT_ID é capturado dinamicamente com base nas credenciais logadas).
 
