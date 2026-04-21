@@ -1,20 +1,50 @@
 # DevOps Toolkit
 
-- Repositório criado com o objetivo de reunir soluções práticas utilizadas no dia a dia com infraestrutura, CI/CD e cloud.
+Repositório dedicado a automações, scripts e templates utilizados no dia a dia de infraestrutura, com foco em cenários reais de DevOps, SRE e Cloud (AWS).
 
-- A proposta não é centralizar exemplos genéricos ou tutoriais, mas sim documentar implementações reais, baseadas em problemas enfrentados em ambiente de produção.
+A proposta é centralizar soluções práticas para problemas comuns de operação, deploy, observabilidade e troubleshooting.
+
+---
+
+## Objetivo
+
+Fornecer ferramentas simples, reutilizáveis e diretas ao ponto para:
+
+- Automatizar tarefas operacionais
+- Reduzir tempo de deploy e validação
+- Facilitar troubleshooting em ambientes distribuídos
+- Padronizar processos de infraestrutura
+
+---
+
+## Filosofia
+
+Este repositório não tem como objetivo ser um framework completo.
+
+A ideia é ser:
+- *prático* → soluções diretas
+- *modular* → cada ferramenta resolve um problema específico
+- *realista* → baseado em cenários do dia a dia
+
+---
 
 ## Observações
 
-- Este repositório está em constante evolução e reflete um processo de aprendizado contínuo aplicado na prática.
+- Scripts e templates podem evoluir conforme novos cenários surgem
+- Nem todas as soluções são genéricas — algumas refletem casos reais específicos
+- Melhorias contínuas fazem parte do processo
 
-- As implementações aqui presentes priorizam simplicidade com eficiência, evitando complexidade desnecessária para o contexto atual.
+---
 
+## Próximos passos
+
+- Novas automações para observabilidade (CloudWatch, logs, métricas)
+- Scripts de coleta e análise de infraestrutura (via Boto3)
+- Ferramentas para troubleshooting automatizado
+- Expansão para múltiplas linguagens (Python, Go)
+
+---
 
 ## Contribuição
 
- - Sugestões e melhorias são bem-vindas.
-
-## Licença
-
-- Uso livre para fins de estudo e adaptação.
+Sinta-se à vontade para utilizar, adaptar ou evoluir as ferramentas conforme necessário.
