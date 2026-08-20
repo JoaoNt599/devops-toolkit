@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "cluster": "",
+    "generatedAt": "2026-08-19T20:25:42Z",
+    "profile": "default",
+    "region": "us-east-1",
+    "vpcId": ""
+  },
+  "architecture": {
+    "ec2": {
+      "elasticIPs": {
+        "_error": "operation error EC2: DescribeAddresses, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "internetGateways": {
+        "_error": "operation error EC2: DescribeInternetGateways, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "natGateways": {
+        "_error": "operation error EC2: DescribeNatGateways, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "routeTables": {
+        "_error": "operation error EC2: DescribeRouteTables, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "securityGroups": {
+        "_error": "operation error EC2: DescribeSecurityGroups, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "subnets": {
+        "_error": "operation error EC2: DescribeSubnets, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "vpcs": {
+        "_error": "operation error EC2: DescribeVpcs, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, request canceled, context deadline exceeded"
+      }
+    },
+    "ecr": {
+      "repositories": {
+        "_error": "operation error ECR: DescribeRepositories, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout\nfailed to get rate limit token, retry quota exceeded, 0 available, 10 requested"
+      }
+    },
+    "ecs": {
+      "_note": "no cluster provided; skipping ECS"
+    },
+    "elbv2": {
+      "loadBalancers": {
+        "_error": "operation error Elastic Load Balancing v2: DescribeLoadBalancers, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      }
+    },
+    "iam": {
+      "_note": "no task-def roles discovered"
+    },
+    "rds": {
+      "dbInstances": {
+        "_error": "operation error RDS: DescribeDBInstances, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, exceeded maximum number of attempts, 3, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout"
+      },
+      "dbSubnetGroups": {
+        "_error": "operation error RDS: DescribeDBSubnetGroups, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout\nfailed to get rate limit token, retry quota exceeded, 0 available, 10 requested"
+      }
+    },
+    "s3": {
+      "buckets": {
+        "_error": "operation error S3: ListBuckets, exceeded maximum number of attempts, 3, get identity: get credentials: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, request send failed, Get \"http://169.254.169.254/latest/meta-data/iam/security-credentials/\": dial tcp 169.254.169.254:80: i/o timeout\nfailed to get rate limit token, retry quota exceeded, 0 available, 10 requested"
+      }
+    }
+  }
+}
