@@ -1,50 +1,50 @@
 # DevOps Toolkit
 
-Repositório dedicado a automações, scripts e templates utilizados no dia a dia de infraestrutura, com foco em cenários reais de DevOps, SRE e Cloud (AWS).
+Repository dedicated to automations, scripts, and templates used in daily infrastructure operations, focusing on real-world DevOps, SRE, and Cloud (AWS) scenarios.
 
-A proposta é centralizar soluções práticas para problemas comuns de operação, deploy, observabilidade e troubleshooting.
-
----
-
-## Objetivo
-
-Fornecer ferramentas simples, reutilizáveis e diretas ao ponto para:
-
-- Automatizar tarefas operacionais
-- Reduzir tempo de deploy e validação
-- Facilitar troubleshooting em ambientes distribuídos
-- Padronizar processos de infraestrutura
+The goal is to centralize practical solutions for common operational, deployment, observability, and troubleshooting problems.
 
 ---
 
-## Filosofia
+## Objective
 
-Este repositório não tem como objetivo ser um framework completo.
+Provide simple, reusable, and straight-to-the-point tools to:
 
-A ideia é ser:
-- *prático* → soluções diretas
-- *modular* → cada ferramenta resolve um problema específico
-- *realista* → baseado em cenários do dia a dia
-
----
-
-## Observações
-
-- Scripts e templates podem evoluir conforme novos cenários surgem
-- Nem todas as soluções são genéricas — algumas refletem casos reais específicos
-- Melhorias contínuas fazem parte do processo
+- Automate operational tasks
+- Reduce deployment and validation time
+- Facilitate troubleshooting in distributed environments
+- Standardize infrastructure processes
 
 ---
 
-## Próximos passos
+## Philosophy
 
-- Novas automações para observabilidade (CloudWatch, logs, métricas)
-- Scripts de coleta e análise de infraestrutura (via Boto3)
-- Ferramentas para troubleshooting automatizado
-- Expansão para múltiplas linguagens (Python, Go)
+This repository is not intended to be a complete framework.
+
+The idea is to be:
+- *practical* → direct solutions
+- *modular* → each tool solves a specific problem
+- *realistic* → based on day-to-day scenarios
 
 ---
 
-## Contribuição
+## Notes
 
-Sinta-se à vontade para utilizar, adaptar ou evoluir as ferramentas conforme necessário.
+- Scripts and templates may evolve as new scenarios arise
+- Not all solutions are generic — some reflect specific real-world cases
+- Continuous improvements are part of the process
+
+---
+
+## Next Steps
+
+- New automations for observability (CloudWatch, logs, metrics)
+- Infrastructure collection and analysis scripts (via Boto3)
+- Automated troubleshooting tools
+- Expansion to multiple languages (Python, Go)
+
+---
+
+## Contributing
+
+Feel free to use, adapt, or evolve the tools as needed.
