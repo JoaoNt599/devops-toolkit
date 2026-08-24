@@ -1,0 +1,26 @@
+variable "cidr_block" {
+  type        = string
+  description = "The CIDR block for the subnet (VPC)"
+}
+
+variable "project_name" {
+  type        = string
+  description = "The name to be used for resources and tags"
+}
+
+variable "region" {
+  type        = string
+  description = "The AWS region to deploy resources"
+  default     = "us-east-1"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "A map of tags to apply to resources"
+  default = {
+    Department  = "DevOps"
+    Organizaton = "Infrastructure and Operations"
+    Project     = "EKS"
+    Environment = "Development"
+  }
+}
